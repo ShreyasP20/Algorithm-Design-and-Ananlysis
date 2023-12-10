@@ -7,10 +7,8 @@ int Partition(int A[], int p, int r) {
 
     for (int j = p; j < r; ++j) {
         if (A[j] <= x) {
-
             i++;
             swap(A[i], A[j]);
-            cout << j << " " <<i<<endl;
         }
     }
 
