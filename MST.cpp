@@ -37,21 +37,16 @@ void mst(int gr[10][10], int n) {
     int sum = 0;
     int visited[n];
 
-
     for (int i = 0; i < n; i++) {
         visited[i] = 0;
     }
 
-
-    visited[0] = 1;
-
-
-    for (int count = 0; count < n - 1; count++) {
+    while (true) {
         int min_val = 100000; 
         int min_vert = -1, min_verta = -1;
 
         for (int i = 0; i < n; i++) {
-            if (visited[i]) {
+            if (!visited[i]) {
                 for (int j = 0; j < n; j++) {
                     if (!visited[j] && gr[i][j] < min_val) {
                         min_val = gr[i][j];
@@ -62,12 +57,26 @@ void mst(int gr[10][10], int n) {
             }
         }
 
+        if (min_vert == -1 || min_verta == -1) {
+            break;
+        }
 
+        
         sum += min_val;
+        gr[min_vert][min_verta] = 100000;
         visited[min_verta] = 1;
 
-        cout << "Edge: " << min_vert << " - " << min_verta << " Weight: " << min_val << endl;
-    }
+        for (int i = 0; i < n; i++) {
+            gr[min_verta][i] = 0;
+        }
 
-    cout << "Total Weight of MST: " << sum << endl;
+        cout << sum << endl;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << gr[i][j] << "\t";
+            }
+            cout << endl;
+        }
+    }
 }
